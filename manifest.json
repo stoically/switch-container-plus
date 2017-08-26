@@ -1,0 +1,45 @@
+{
+  "manifest_version": 2,
+  
+  "name":    "Switch Container",
+  "short_name": "SwitchCon",
+  "author":  "MarsCat",
+  "description": "Allows to switch the current tab to a different container.",
+  "version": "0.1",
+
+  
+  "developer":
+  {
+    "name": "MarsCat",
+    "url": "https://gitlab.com/mjanetmars/switch-container"
+  },
+
+  "icons":
+  {
+    "48": "switch_container.svg",
+    "96": "switch_container.svg"
+  },
+   
+  "browser_action":
+  {
+    "browser_style": true,
+    "default_title": "Switch Container",
+    "default_icon":  "switch_container.svg",
+    "default_popup": "switch_popup.html"
+  },
+  
+  "permissions":
+  [
+    "tabs",
+    "activeTab",
+    "cookies",
+    "contextualIdentities"
+  ],
+  
+  "background":
+  {
+    "scripts": ["background.js"]
+  },
+  
+  "incognito": "not_allowed",
+}

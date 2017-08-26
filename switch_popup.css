@@ -1,0 +1,43 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ - License, v. 2.0. If a copy of the MPL was not distributed with this
+ - file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/* based on https://github.com/mdn/webextensions-examples/blob/master/contextual-identities/context.css */
+
+body
+{
+  font-size: 80%;
+}
+
+a
+{
+  padding: 4px 8px;
+  color: black;
+  text-decoration: none;
+  display: block;
+}
+a:hover
+{
+  background-color: #ccc;
+}
+
+span.icon
+{
+  width:   16px;
+  height:  16px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right:  0.5em;
+}
+
+span.identity
+{
+  height:  16px;
+  vertical-align: middle;
+}
+
+span.icon,
+span.identity
+{
+  pointer-events: none;
+}
