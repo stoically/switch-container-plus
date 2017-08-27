@@ -2,6 +2,8 @@
 
 **Switch Containers** is a WebExt-based Firefox add-on that allows users to switch the current tab's container on the fly.
 
+The add-on is officially available here: https://addons.mozilla.org/en-US/firefox/addon/switch-container/
+
 ## Known bugs
 
 ### Switching the container tab removes the tab's history

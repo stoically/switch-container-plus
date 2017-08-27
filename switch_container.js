@@ -19,8 +19,6 @@ function changeContainer(event)
       
       currentTabInfo.then( (tab) =>
       {
-        console.log( tab.status );
-        
         if (tab.status == "complete")
         {
           var currentURL = tab.url;
