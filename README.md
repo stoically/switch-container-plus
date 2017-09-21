@@ -4,15 +4,7 @@
 
 The add-on is officially available here: https://addons.mozilla.org/en-US/firefox/addon/switch-container/
 
-## Known bugs
-
-### Switching the container tab removes the tab's history
-
-As far as I've figured out,. the API doesn't allow for changing the `cookieStoreId` of a given tab unless a new tab is created with `browser.tabs.create`. This implementation basically recreates the current tab into a newly created tab then removes the original, which means that the tab's history is gone with the original tab.
-
-Unless I can find a way to change the `cookieStoreId` of a tab without creating a new tab, or copy a previous tab's history into a newly created tab, then the tab history of any switched tab will be gone.
-
-However, considering the assumed purpose of container tabs, this might be a trivial(?).
+IMPORTANT: There are security concerns involved when changing a tab between containers. Before installing, please read this article on the matter: https://github.com/mozilla/testpilot-containers/wiki/Moving-between-containers
 
 ## Sources
 
