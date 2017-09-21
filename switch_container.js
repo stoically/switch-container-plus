@@ -25,7 +25,14 @@ function changeContainer(event)
           var currentIndex = tab.index;
 
           /* duplicates tab with new identity */
-          browser.tabs.create({url: currentURL, cookieStoreId: event.target.dataset.identity, index: currentIndex+1 });
+          if (event.target.dataset.identity != -1)
+          {
+            browser.tabs.create({url: currentURL, cookieStoreId: event.target.dataset.identity, index: currentIndex+1 });
+          }
+          else
+          {
+            browser.tabs.create({url: currentURL, index: currentIndex+1 });
+          }
           
           /* removes previous tab */
           browser.tabs.remove( tabs[0].id );
@@ -74,5 +81,30 @@ else
      
       div.appendChild(button);
     }
+    
+    /* decontainer */
+    let button  = document.createElement('a');
+    let icon    = document.createElement('span');
+    let span    = document.createElement('span');
+    let br      = document.createElement('br');
+
+    icon.className = 'icon';
+    icon.innerHTML = '&#11044';
+    icon.style = `color: #888`;
+
+    span.className = 'identity';
+    span.innerText = 'Decontain';
+
+    button.href = '#';
+    button.dataset.action   = 'change';
+    button.dataset.identity = -1;
+    button.addEventListener('click', changeContainer);
+    button.style = `border-top: 1px solid #ccc`;
+
+    button.appendChild(icon);
+    button.appendChild(span);
+    button.appendChild(br);
+
+    div.appendChild(button);
   });
 }
