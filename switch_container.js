@@ -16,22 +16,23 @@ function changeContainer(event)
     {
       /* gets current tab info, then stores current tab's url */
       var currentTabInfo = browser.tabs.get( tabs[0].id );
-      
+           
       currentTabInfo.then( (tab) =>
       {
         if (tab.status == "complete")
         {
           var currentURL = tab.url;
           var currentIndex = tab.index;
+          var currentPinned = tab.pinned;
 
           /* duplicates tab with new identity */
           if (event.target.dataset.identity != -1)
           {
-            browser.tabs.create({url: currentURL, cookieStoreId: event.target.dataset.identity, index: currentIndex+1 });
+            browser.tabs.create({url: currentURL, cookieStoreId: event.target.dataset.identity, index: currentIndex+1, pinned: currentPinned });
           }
           else
           {
-            browser.tabs.create({url: currentURL, index: currentIndex+1 });
+            browser.tabs.create({url: currentURL, index: currentIndex+1, pinned: currentPinned });
           }
           
           /* removes previous tab */
