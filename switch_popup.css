@@ -6,13 +6,15 @@
 
 body
 {
-  font-size: 80%;
+  font: caption;
+  font-size: 13px;
+  font-weight: 600;
 }
 
 a
 {
   padding: 4px 8px;
-  color: black;
+  color: #2a2a2e;
   text-decoration: none;
   display: block;
 }

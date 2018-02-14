@@ -19,6 +19,8 @@ This add-on was built based on the following sources:
 -- `omni.ja\chrome\browser\content\browser\`
 
 ## What's New
+- **Version 0.8**
+-- Now the add-on uses proper colors, fonts and icons. Thanks to Martin Giger for contributing to this new version!
 - **Version 0.7**
 -- Pinned tabs remained pinned, but must be repositioned.
 - **Version 0.6**
