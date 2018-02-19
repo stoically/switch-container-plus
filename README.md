@@ -46,3 +46,7 @@ Fork of [Switch Container](https://gitlab.com/mjanetmars/switch-container) becau
 got denied which would've introduced middle mouse clicking on containers in the list to open new tabs for that container in the background.
 
 Thanks to MarsCat for the main work on this Add-on.
+
+## License
+
+Mozilla Public License Version 2.0
