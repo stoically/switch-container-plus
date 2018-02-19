@@ -21,7 +21,7 @@ function changeContainer(event)
       {
         if (tab.status == "complete")
         {
-          var currentURL = tab.url;
+          var currentURL = tab.url !== "about:newtab" ? tab.url : null;
           var currentIndex = tab.index;
           var currentPinned = tab.pinned;
 

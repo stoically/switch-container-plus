@@ -7,43 +7,35 @@
 /* enable / disable container button */
 
 /* only enable it on http(s) urls */
-const APPLICABLE_PROTOCOLS = ["http:", "https:"];
+const APPLICABLE_PROTOCOLS = ["http:", "https:", "about:blank", "about:newtab"];
 
-/* checks if the url is a http(s) */
-function protocolIsApplicable( url )
-{
-  var anchor  = document.createElement('a');
-  anchor.href = url;
-  return APPLICABLE_PROTOCOLS.includes( anchor.protocol );
+/* checks if the url is applicable */
+function protocolIsApplicable(url) {
+  return APPLICABLE_PROTOCOLS.find(protocol => url.startsWith(protocol));
 }
 
- 
+
 
 /* enable/disable button */
-function initializePageAction(tab)
-{
-  if ( protocolIsApplicable( tab.url ) )
-  {
-    browser.browserAction.enable( tab.id );
-  }
-  else
-  {
-    browser.browserAction.disable( tab.id );
+function initializePageAction(tab) {
+  if (!tab.incognito && protocolIsApplicable(tab.url)) {
+    browser.browserAction.enable(tab.id);
+  } else {
+    browser.browserAction.disable(tab.id);
   }
 }
 
 /* check if any tab changed */
-browser.tabs.onUpdated.addListener( (id, changeInfo, tab) =>
-{
-  initializePageAction( tab );
+browser.tabs.onUpdated.addListener((id, changeInfo, tab) => {
+  if (changeInfo.url) {
+    initializePageAction(tab);
+  }
 });
 
 /* init by checking all tabs */
 var currentTabs = browser.tabs.query({});
-currentTabs.then((tabs) =>
-{
-  for (let tab of tabs)
-  {
+currentTabs.then((tabs) => {
+  for (let tab of tabs) {
     initializePageAction( tab );
   }
 });
