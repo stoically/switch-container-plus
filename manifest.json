@@ -7,24 +7,20 @@
   "description": "Allows to switch the current tab to a different container in multiple ways",
   "version": "0.9",
 
-
-  "developer":
-  {
-    "name": "stoically",
-    "url": "https://github.com/stoically/firefox-add-on-switch-container-plus"
-  },
-
   "icons":
   {
-    "48": "switch_container.svg",
-    "96": "switch_container.svg"
+    "48": "switch_container-48.svg",
+    "96": "switch_container-96.svg"
   },
 
   "browser_action":
   {
     "browser_style": true,
     "default_title": "Switch Container",
-    "default_icon":  "switch_container.svg",
+    "default_icon": {
+      "16": "switch_container.svg",
+      "32": "switch_container-32.svg"
+    },
     "default_popup": "switch_popup.html"
   },
 
