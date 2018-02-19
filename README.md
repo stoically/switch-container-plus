@@ -21,7 +21,7 @@ This add-on was built based on the following sources:
 -- `omni.ja\chrome\browser\content\browser\`
 
 ## What's New
-- **Version 0.9**
+- **Version 0.10**
 -- You can now middle mouse, ctrl+left click or cmd+left click (mac) to open the current website in a new background tab in the target container
 - **Version 0.8**
 -- Now the add-on uses proper colors, fonts and icons. Thanks to Martin Giger for contributing to this new version!
