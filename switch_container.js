@@ -25,18 +25,24 @@ function changeContainer(event)
           var currentIndex = tab.index;
           var currentPinned = tab.pinned;
 
+          var middleMouse = event.button === 1;
+          var active = !middleMouse;
+
           /* duplicates tab with new identity */
           if (event.target.dataset.identity != -1)
           {
-            browser.tabs.create({url: currentURL, cookieStoreId: event.target.dataset.identity, index: currentIndex+1, pinned: currentPinned });
+            browser.tabs.create({url: currentURL, cookieStoreId: event.target.dataset.identity, index: currentIndex+1, pinned: currentPinned, active });
           }
           else
           {
-            browser.tabs.create({url: currentURL, index: currentIndex+1, pinned: currentPinned });
+            browser.tabs.create({url: currentURL, index: currentIndex+1, pinned: currentPinned, active });
           }
 
-          /* removes previous tab */
-          browser.tabs.remove( tabs[0].id );
+          /* removes previous tab if not middle mouse clicked */
+          if ( !middleMouse )
+          {
+            browser.tabs.remove( tabs[0].id );
+          }
         }
       });
     });
@@ -59,7 +65,7 @@ else
 
     for (let identity of identities)
     {
-      let button  = document.createElement('a');
+      let button  = document.createElement('li');
       let icon    = document.createElement('span');
       let span    = document.createElement('span');
       let br      = document.createElement('br');
@@ -86,7 +92,7 @@ else
       button.href = '#';
       button.dataset.action   = 'change';
       button.dataset.identity = identity.cookieStoreId;
-      button.addEventListener('click', changeContainer);
+      button.addEventListener('mouseup', changeContainer);
 
       button.appendChild(icon);
       button.appendChild(span);
@@ -96,7 +102,7 @@ else
     }
 
     /* decontainer */
-    let button  = document.createElement('a');
+    let button  = document.createElement('li');
     let icon    = document.createElement('span');
     let span    = document.createElement('span');
     let br      = document.createElement('br');
@@ -111,7 +117,7 @@ else
     button.href = '#';
     button.dataset.action   = 'change';
     button.dataset.identity = -1;
-    button.addEventListener('click', changeContainer);
+    button.addEventListener('mouseup', changeContainer);
     button.style = `border-top: 1px solid #ccc`;
 
     button.appendChild(icon);

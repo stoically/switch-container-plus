@@ -11,14 +11,15 @@ body
   font-weight: 600;
 }
 
-a
+li
 {
   padding: 4px 8px;
   color: #2a2a2e;
   text-decoration: none;
   display: block;
+  cursor: pointer;
 }
-a:hover
+li:hover
 {
   background-color: #ccc;
 }
