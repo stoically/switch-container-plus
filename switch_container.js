@@ -25,29 +25,31 @@ function changeContainer(event)
           var currentIndex = tab.index;
           var currentPinned = tab.pinned;
 
-          var middleMouse = event.button === 1;
-          var active = !middleMouse;
+          var removeOldTab = true;
+          if (event.button === 1 ||
+              (event.button === 0 &&
+              (event.ctrlKey || event.metaKey))) {
+            removeOldTab = false;
+          }
 
           /* duplicates tab with new identity */
           if (event.target.dataset.identity != -1)
           {
-            browser.tabs.create({url: currentURL, cookieStoreId: event.target.dataset.identity, index: currentIndex+1, pinned: currentPinned, active });
+            browser.tabs.create({url: currentURL, cookieStoreId: event.target.dataset.identity, index: currentIndex+1, pinned: currentPinned, active: removeOldTab });
           }
           else
           {
-            browser.tabs.create({url: currentURL, index: currentIndex+1, pinned: currentPinned, active });
+            browser.tabs.create({url: currentURL, index: currentIndex+1, pinned: currentPinned, active: removeOldTab });
           }
 
           /* removes previous tab if not middle mouse clicked */
-          if ( !middleMouse )
+          if ( removeOldTab )
           {
             browser.tabs.remove( tabs[0].id );
           }
         }
       });
     });
-
-    event.preventDefault();
   }
   return;
 }
