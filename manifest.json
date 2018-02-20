@@ -17,11 +17,20 @@
   {
     "browser_style": true,
     "default_title": "Switch Container",
+    "default_popup": "switch_popup.html",
     "default_icon": {
-      "16": "switch_container.svg",
-      "32": "switch_container-32.svg"
+      "16": "switch_container-browseraction-16.svg",
+      "32": "switch_container-browseraction-32.svg"
     },
-    "default_popup": "switch_popup.html"
+    "theme_icons": [{
+      "light": "switch_container-browseraction-dark-16.svg",
+      "dark": "switch_container-browseraction-16.svg",
+      "size": 16
+    }, {
+      "light": "switch_container-browseraction-dark-32.svg",
+      "dark": "switch_container-browseraction-32.svg",
+      "size": 32
+    }]
   },
 
   "permissions":
