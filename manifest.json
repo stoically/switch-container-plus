@@ -5,7 +5,7 @@
   "short_name": "SwitchConPlus",
   "author":  "stoically",
   "description": "Allows to switch the current tab to a different container in multiple ways",
-  "version": "0.12",
+  "version": "0.13",
 
   "icons":
   {
