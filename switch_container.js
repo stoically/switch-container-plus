@@ -55,77 +55,103 @@ function changeContainer(event)
 }
 
 /* GUI */
-var div = document.getElementById('identity-list');
+function buildGUI(hide_regex) {
+  var div = document.getElementById('identity-list');
 
-if (browser.contextualIdentities === undefined) { div.innerText = 'Containers are disabled :/'; }
-else
-{
-  browser.contextualIdentities.query({})
-  .then((identities) =>
+  if (browser.contextualIdentities === undefined) { div.innerText = 'Containers are disabled :/'; }
+  else
   {
-    if (!identities.length) { div.innerText = 'No container identities available.'; return; }
+    browser.contextualIdentities.query({})
+      .then((identities) =>
+      {
+        if (!identities.length) { div.innerText = 'No container identities available.'; return; }
 
-    for (let identity of identities)
-    {
-      let button  = document.createElement('li');
-      let icon    = document.createElement('span');
-      let span    = document.createElement('span');
-      let br      = document.createElement('br');
+        for (let identity of identities)
+        {
+          if (hide_regex && hide_regex.test(identity.name)) {
+            continue;
+          }
 
-      let colorType = 'color';
-      if (identity.hasOwnProperty('iconUrl')) {
-        icon.style.mask = `url(${identity.iconUrl}) center / contain no-repeat`;
-        colorType = 'background';
-      }
-      else {
+          let button  = document.createElement('li');
+          let icon    = document.createElement('span');
+          let span    = document.createElement('span');
+          let br      = document.createElement('br');
+
+          let colorType = 'color';
+          if (identity.hasOwnProperty('iconUrl')) {
+            icon.style.mask = `url(${identity.iconUrl}) center / contain no-repeat`;
+            colorType = 'background';
+          }
+          else {
+            icon.innerHTML = '&#11044';
+          }
+          icon.className = 'icon';
+          if (identity.hasOwnProperty('colorCode')) {
+            icon.style[colorType] = identity.colorCode;
+          }
+          else {
+            icon.style[colorType] = identity.color;
+          }
+
+          span.className = 'identity';
+          span.innerText = identity.name;
+
+          button.href = '#';
+          button.dataset.action   = 'change';
+          button.dataset.identity = identity.cookieStoreId;
+          button.addEventListener('mouseup', changeContainer);
+
+          button.appendChild(icon);
+          button.appendChild(span);
+          button.appendChild(br);
+
+          div.appendChild(button);
+        }
+
+        /* decontainer */
+        let button  = document.createElement('li');
+        let icon    = document.createElement('span');
+        let span    = document.createElement('span');
+        let br      = document.createElement('br');
+
+        icon.className = 'icon';
         icon.innerHTML = '&#11044';
-      }
-      icon.className = 'icon';
-      if (identity.hasOwnProperty('colorCode')) {
-        icon.style[colorType] = identity.colorCode;
-      }
-      else {
-        icon.style[colorType] = identity.color;
-      }
+        icon.style = `color: #888`;
 
-      span.className = 'identity';
-      span.innerText = identity.name;
+        span.className = 'identity';
+        span.innerText = 'Decontain';
 
-      button.href = '#';
-      button.dataset.action   = 'change';
-      button.dataset.identity = identity.cookieStoreId;
-      button.addEventListener('mouseup', changeContainer);
+        button.href = '#';
+        button.dataset.action   = 'change';
+        button.dataset.identity = -1;
+        button.addEventListener('mouseup', changeContainer);
+        button.style = `border-top: 1px solid #ccc`;
 
-      button.appendChild(icon);
-      button.appendChild(span);
-      button.appendChild(br);
+        button.appendChild(icon);
+        button.appendChild(span);
+        button.appendChild(br);
 
-      div.appendChild(button);
-    }
-
-    /* decontainer */
-    let button  = document.createElement('li');
-    let icon    = document.createElement('span');
-    let span    = document.createElement('span');
-    let br      = document.createElement('br');
-
-    icon.className = 'icon';
-    icon.innerHTML = '&#11044';
-    icon.style = `color: #888`;
-
-    span.className = 'identity';
-    span.innerText = 'Decontain';
-
-    button.href = '#';
-    button.dataset.action   = 'change';
-    button.dataset.identity = -1;
-    button.addEventListener('mouseup', changeContainer);
-    button.style = `border-top: 1px solid #ccc`;
-
-    button.appendChild(icon);
-    button.appendChild(span);
-    button.appendChild(br);
-
-    div.appendChild(button);
-  });
+        div.appendChild(button);
+      });
+  }
 }
+
+/* Load options */
+function onError(error) {
+  console.log(`Error: ${error}`);
+}
+
+function onGot(item) {
+  var hide_regex = "";
+  if (item.hide_regex) {
+    hide_regex = item.hide_regex;
+  }
+  if (hide_regex !== "") {
+    buildGUI(new RegExp(hide_regex));
+  } else {
+    buildGUI();
+  }
+}
+
+var getting = browser.storage.local.get("hide_regex");
+getting.then(onGot, onError);
