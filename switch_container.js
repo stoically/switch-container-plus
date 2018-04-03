@@ -8,7 +8,7 @@
 
 function changeContainer(event)
 {
-  if (event.target.dataset.action = 'change')
+  if (event.target.dataset.action === 'change')
   {
     var currentTab = browser.tabs.query({ currentWindow: true, active: true });
 
@@ -19,7 +19,7 @@ function changeContainer(event)
 
       currentTabInfo.then( (tab) =>
       {
-        if (tab.status == "complete")
+        if (tab.status === "complete")
         {
           var currentURL = tab.url !== "about:newtab" ? tab.url : null;
           var currentIndex = tab.index;
@@ -33,7 +33,7 @@ function changeContainer(event)
           }
 
           /* duplicates tab with new identity */
-          if (event.target.dataset.identity != -1)
+          if (event.target.dataset.identity !== -1)
           {
             browser.tabs.create({url: currentURL, cookieStoreId: event.target.dataset.identity, index: currentIndex+1, pinned: currentPinned, active: removeOldTab });
           }
@@ -51,7 +51,6 @@ function changeContainer(event)
       });
     });
   }
-  return;
 }
 
 /* GUI */
