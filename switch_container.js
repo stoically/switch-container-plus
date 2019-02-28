@@ -33,7 +33,7 @@ function changeContainer(event)
           }
 
           /* duplicates tab with new identity */
-          if (event.target.dataset.identity !== -1)
+          if (parseInt(event.target.dataset.identity) !== -1)
           {
             browser.tabs.create({url: currentURL, cookieStoreId: event.target.dataset.identity, index: currentIndex+1, pinned: currentPinned, active: removeOldTab });
           }
