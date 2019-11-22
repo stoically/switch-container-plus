@@ -1,20 +1,18 @@
 {
   "manifest_version": 2,
 
-  "name":    "Switch Container Plus",
+  "name": "Switch Container Plus",
   "short_name": "SwitchConPlus",
-  "author":  "stoically",
+  "author": "stoically",
   "description": "Allows to switch the current tab to a different container in multiple ways",
-  "version": "0.16",
+  "version": "0.19",
 
-  "icons":
-  {
+  "icons": {
     "48": "switch_container-48.svg",
     "96": "switch_container-96.svg"
   },
 
-  "browser_action":
-  {
+  "browser_action": {
     "browser_style": true,
     "default_title": "Switch Container",
     "default_popup": "switch_popup.html",
@@ -22,15 +20,18 @@
       "16": "switch_container-browseraction-16.svg",
       "32": "switch_container-browseraction-32.svg"
     },
-    "theme_icons": [{
-      "light": "switch_container-browseraction-dark-16.svg",
-      "dark": "switch_container-browseraction-16.svg",
-      "size": 16
-    }, {
-      "light": "switch_container-browseraction-dark-32.svg",
-      "dark": "switch_container-browseraction-32.svg",
-      "size": 32
-    }]
+    "theme_icons": [
+      {
+        "light": "switch_container-browseraction-dark-16.svg",
+        "dark": "switch_container-browseraction-16.svg",
+        "size": 16
+      },
+      {
+        "light": "switch_container-browseraction-dark-32.svg",
+        "dark": "switch_container-browseraction-32.svg",
+        "size": 32
+      }
+    ]
   },
 
   "options_ui": {
@@ -38,8 +39,7 @@
     "browser_style": true
   },
 
-  "permissions":
-  [
+  "permissions": [
     "tabs",
     "activeTab",
     "cookies",
@@ -47,9 +47,8 @@
     "storage"
   ],
 
-  "background":
-  {
-    "scripts": ["background.js"]
+  "background": {
+    "scripts": ["psl.min.js", "background.js"]
   },
 
   "omnibox": {
