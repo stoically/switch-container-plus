@@ -90,6 +90,18 @@ browser.omnibox.onInputEntered.addListener(async (text, disposition) => {
          tabs[0].url !== 'about:blank' &&
          tabs[0].url !== 'about:home') {
         tabCreateProperties.url = tabs[0].url;
+      } else {
+        try {
+          const parsedUrl = new URL(context.name);
+          if (['http:', 'https:'].includes(parsedUrl.protocol) && psl.isValid(parsedUrl.hostname)) {
+            tabCreateProperties.url = context.name;
+          }
+        } catch (error) {
+          if (psl.isValid(context.name)) {
+            tabCreateProperties.url = `http://${context.name}`;
+          }
+        }
+        
       }
       await browser.tabs.create(tabCreateProperties);
       browser.tabs.remove(tabs[0].id);
